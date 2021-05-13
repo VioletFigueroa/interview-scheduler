@@ -2,7 +2,7 @@ import React from "react";
 
 //import "components/DayList.scss";
 
-import classnames from "classnames";
+//import classnames from "classnames";
 
 import DayListItem from "./DayListItem";
 
