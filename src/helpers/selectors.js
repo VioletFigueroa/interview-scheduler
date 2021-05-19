@@ -1,5 +1,3 @@
-import lodash from "lodash";
-
 export function getAppointmentsForDay(state, day) {
   let output = [];
   const filteredDays = state.days.filter((id) => id.name === day);
