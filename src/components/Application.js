@@ -13,62 +13,62 @@ export default function Application(props) {
     day: "Monday",
     days: [],
     appointments: {
-      0: [
-        {
-          id: 1,
-          time: "12pm",
-        },
-        {
-          id: 2,
-          time: "1pm",
-          interview: {
-            student: "Lydia Miller-Jones",
-            interviewer: {
-              id: 1,
-              name: "Sylvia Palmer",
-              avatar: "https://i.imgur.com/LpaY82x.png",
-            },
-          },
-        },
-        {
-          id: 3,
-          time: "2pm",
-        },
-        {
-          id: 4,
-          time: "3pm",
-          interview: {
-            student: "Archie Cohen",
-            interviewer: {
-              id: 2,
-              name: "Tori Malcolm",
-              avatar: "https://i.imgur.com/Nmx0Qxo.png",
-            },
-          },
-        },
-        {
-          id: 5,
-          time: "4pm",
-          interview: {
-            student: "Maria Boucher",
-            interviewer: {
-              id: 3,
-              name: "Mildred Nazir",
-              avatar: "https://i.imgur.com/T2WwVfS.png",
-            },
-          },
-        },
-      ],
+      // 0: [
+      //   {
+      //     id: 1,
+      //     time: "12pm",
+      //   },
+      //   {
+      //     id: 2,
+      //     time: "1pm",
+      //     interview: {
+      //       student: "Lydia Miller-Jones",
+      //       interviewer: {
+      //         id: 1,
+      //         name: "Sylvia Palmer",
+      //         avatar: "https://i.imgur.com/LpaY82x.png",
+      //       },
+      //     },
+      //   },
+      //   {
+      //     id: 3,
+      //     time: "2pm",
+      //   },
+      //   {
+      //     id: 4,
+      //     time: "3pm",
+      //     interview: {
+      //       student: "Archie Cohen",
+      //       interviewer: {
+      //         id: 2,
+      //         name: "Tori Malcolm",
+      //         avatar: "https://i.imgur.com/Nmx0Qxo.png",
+      //       },
+      //     },
+      //   },
+      //   {
+      //     id: 5,
+      //     time: "4pm",
+      //     interview: {
+      //       student: "Maria Boucher",
+      //       interviewer: {
+      //         id: 3,
+      //         name: "Mildred Nazir",
+      //         avatar: "https://i.imgur.com/T2WwVfS.png",
+      //       },
+      //     },
+      //   },
+      // ],
     },
   });
   const setDay = (day) => setState({ ...state, day });
   useEffect(() => {
-    const daysURL = "http://localhost:8001/api/days";
-    const appointmentsURL = "http://localhost:8001/api/appointments";
-    // const interviewersURL = "http://localhost:8001/api/interviewers";
+    const api = '/api/'
+    const daysURL = "days";
+    const appointmentsURL = api + "appointments";
+    // const interviewersURL = api + "interviewers";
     Promise.all([axios.get(daysURL), axios.get(appointmentsURL)])
       .then((res) => {
-        console.log(res);
         setState((prev) => ({
           ...prev,
           days: res[0].data,
@@ -77,12 +77,9 @@ export default function Application(props) {
       })
       .catch((err) => console.log(err));
   }, []);
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
-  
-
-  dailyAppointments.map((appointment) => (
-    <Appointment key={appointment.id} {...appointment} />
-  ));
+  const dailyAppointments = getAppointmentsForDay(state, state.day).map(
+    (appointment) => <Appointment key={appointment.id} {...appointment} />
+  );
   return (
     <main className="layout">
       <section className="sidebar">
