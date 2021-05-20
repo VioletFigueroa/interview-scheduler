@@ -9,9 +9,11 @@ export default function useVisualMode(initial) {
   }
   function back() {
     if (history.length > 1) {
-      history.pop();
+      console.log ("History at 12: " + history);
+      setHistory((prev) => [...prev.slice(0,history.length-1)]);
+      console.log ("History at 14: " + history);
+      setMode(history[history.length - 1]);
     }
-    return setMode(history[history.length - 1]);
   }
   return { mode, transition, back };
 }
