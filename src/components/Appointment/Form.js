@@ -40,7 +40,7 @@ export default function Form(props) {
           <Button danger onClick={cancel}>
             Cancel
           </Button>
-          <Button confirm onClick={(event) => event.onSave()}>
+          <Button confirm onClick={(event) => props.onSave(event)}>
             Save
           </Button>
         </section>
