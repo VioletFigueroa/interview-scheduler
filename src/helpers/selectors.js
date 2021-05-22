@@ -23,20 +23,14 @@ export function getInterview(state, interview) {
   return interviewerData;
 }
 
+// Manali worked with me to help guide my code for this function;
 export function getInterviewersForDay(state, day) {
-  let output = [];
-  const filteredDays = state.days.filter((id) => id.name === day);
-  if (filteredDays.length === 0) {
-    return output;
+  if (state.days.length === 0 || state === null || day === null) {
+    return [];
   }
-  const interviewerIDs = filteredDays[0]["interviewers"];
-  for (const id of interviewerIDs) {
-    for (const key of Object.keys(state.interviewers)) {
-      if (state.interviewers[key]["id"] === id) {
-        output.push(state.interviewers[key]);
-      }
-    }
-  }
-  return output;
+  const found = state.days.find((dayListItem) => day === dayListItem.name);
+  if (found === undefined) return [];
+  return found.interviewers.map(
+    (interviewer) => state.interviewers[interviewer]
+  );
 }
-
