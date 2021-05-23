@@ -8,14 +8,13 @@ import {
   getInterview,
   getInterviewersForDay,
 } from "helpers/selectors";
-import useApplicationData from "helpers/useApplicationData";
+import { useApplicationData } from "helpers/useApplicationData";
 
 import "components/Application.scss";
 
 export default function Application(props) {
   const { state, setDay, bookInterview, cancelInterview } =
     useApplicationData();
-  let error = null;
 
   const interviewers = getInterviewersForDay(state, state.day);
 
@@ -29,7 +28,6 @@ export default function Application(props) {
           interviewers={interviewers}
           bookInterview={bookInterview}
           cancelInterview={cancelInterview}
-          error={error}
         />
       );
     }
@@ -54,8 +52,10 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {appointments}
-        <Appointment key="last" time="5pm" />
+        <section className="schedule">
+          {appointments}
+          <Appointment key="last" time="5pm" />
+        </section>
       </section>
     </main>
   );
