@@ -17,8 +17,8 @@ const CREATE = "CREATE";
 const SAVING = "SAVING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
-
-
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -29,23 +29,26 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
+
     transition(SAVING);
-    props.bookInterview(props.id, interview);
-    if(props.error && props.error === props.ERROR_SAVE) error(props.ERROR_SAVE);
-    transition(SHOW);
+
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch((error) => transition(ERROR_SAVE, true));
   };
-  const cancel = (id) => {
-    transition(CONFIRM);
-    props.cancelInterview(id);
-    if(props.error && props.error === props.ERROR_DELETE) error(props.ERROR_DELETE);
-    transition(EMPTY);
+  const destroy = (event) => {
+    transition(DELETING, true);
+    props
+      .cancelInterview(props.id)
+      .then(() => transition(EMPTY))
+      .catch((error) => transition(ERROR_DELETE, true));
   };
   const edit = (id) => {
     transition(EDIT);
-  }
-  const error = (error) =>{
-    transition(error, true);
-  }
+  };
+
+  };
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -59,13 +62,18 @@ export default function Appointment(props) {
         />
       )}
       {mode === CREATE && (
-        <Form interviewers={ props.interviewers} onCancel={back} onSave={save} />
+        <Form interviewers={props.interviewers} onCancel={back} onSave={save} />
       )}
       {mode === EDIT && (
-        <Form name = {props.name} interviewers={ props.interviewers} onCancel={back} onSave={save} />
+        <Form
+          name={props.name}
+          interviewers={props.interviewers}
+          onCancel={back}
+          onSave={save}
+        />
       )}
       {mode === SAVING && <Status message={props.message} />}
-      {mode === CONFIRM && <Confirm onClick={() => cancel(props.id)}/>}
+      {mode === CONFIRM && <Confirm onClick={(event) => destroy(event)} />}
     </article>
   );
 }
