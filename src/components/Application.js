@@ -13,6 +13,9 @@ import {
 import "components/Application.scss";
 
 export default function Application(props) {
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE";
+  let error = null;
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -37,7 +40,10 @@ export default function Application(props) {
           appointments
         });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        error = ERROR_SAVE;
+      });
   };
   const cancelInterview = (id) => {
     const appointment = {
@@ -56,7 +62,10 @@ export default function Application(props) {
           appointments,
         });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        error = ERROR_DELETE;
+      });
   };
   const setDay = (day) => setState({ ...state, day });
   useEffect(() => {
@@ -92,6 +101,7 @@ export default function Application(props) {
           interviewers={interviewers}
           bookInterview={bookInterview}
           cancelInterview={cancelInterview}
+          error={error}
         />
       );
     }

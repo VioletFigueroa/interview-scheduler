@@ -18,6 +18,8 @@ const SAVING = "SAVING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
 
+
+
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -29,15 +31,20 @@ export default function Appointment(props) {
     };
     transition(SAVING);
     props.bookInterview(props.id, interview);
+    if(props.error && props.error === props.ERROR_SAVE) error(props.ERROR_SAVE);
     transition(SHOW);
   };
   const cancel = (id) => {
     transition(CONFIRM);
     props.cancelInterview(id);
+    if(props.error && props.error === props.ERROR_DELETE) error(props.ERROR_DELETE);
     transition(EMPTY);
   };
   const edit = (id) => {
     transition(EDIT);
+  }
+  const error = (error) =>{
+    transition(error, true);
   }
   return (
     <article className="appointment">
