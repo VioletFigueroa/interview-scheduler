@@ -45,9 +45,8 @@ export default function Appointment(props) {
       .then(() => transition(EMPTY))
       .catch((error) => transition(ERROR_DELETE, true));
   };
-  const edit = (id) => {
-    transition(EDIT);
-  };
+  const confirm = (id) => transition(CONFIRM);
+  const edit = () => transition(EDIT);
 
   return (
     <article className="appointment">
@@ -57,7 +56,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview && props.interview.student}
           interviewer={props.interview && props.interview.interviewer}
-          onCancel={back}
+          onDelete={confirm}
           onEdit={edit}
         />
       )}
@@ -72,8 +71,8 @@ export default function Appointment(props) {
           onSave={save}
         />
       )}
-      {mode === SAVING && <Status message={props.message} />}
-      {mode === CONFIRM && <Confirm onClick={(event) => destroy(event)} />}
+      {mode === SAVING && <Status message={SAVING} />}
+      {mode === CONFIRM && <Confirm onCancel={back} onConfirm={destroy} />}
     </article>
   );
 }

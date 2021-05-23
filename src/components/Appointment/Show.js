@@ -4,14 +4,15 @@ import "./styles.scss";
 
 export default function Show(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  const onCancel = (id) => {
+  const onDelete = (id) => {
     setInterviewer(null);
-    props.onCancel(id);
+    props.onDelete(id);
   };
   const onEdit = (id) => {
     setInterviewer(null);
     props.onEdit(id);
   }
+
 
   return (
     <main className="appointment__card appointment__card--show">
@@ -34,7 +35,7 @@ export default function Show(props) {
             className="appointment__actions-button"
             src="images/trash.png"
             alt="Delete"
-            onClick={() => onCancel(props.id)}
+            onClick={() => onDelete(props.id)}
           />
         </section>
       </section>

@@ -18,8 +18,8 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    axios
-      .put(`/api/appointments/${id}`)
+    return axios
+      .put(`/api/appointments/${id}`, appointment)
       .then(() => {
         setState({
           ...state,
@@ -39,7 +39,7 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    axios
+    return axios
       .delete(`/api/appointments/${id}`)
       .then(() => {
         setState({
@@ -71,10 +71,10 @@ export function useApplicationData() {
       })
       .catch((err) => console.log(err));
   }, []);
-  return({
+  return {
     state,
     setDay,
     bookInterview,
-    cancelInterview
-  })
+    cancelInterview,
+  };
 }
