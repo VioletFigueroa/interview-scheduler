@@ -15,6 +15,7 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
+const DELETING = "DELETEING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
@@ -48,7 +49,6 @@ export default function Appointment(props) {
     transition(EDIT);
   };
 
-  };
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -57,7 +57,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview && props.interview.student}
           interviewer={props.interview && props.interview.interviewer}
-          onCancel={cancel}
+          onCancel={back}
           onEdit={edit}
         />
       )}

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-export function useApplicationData() {
-
+export default function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -29,7 +28,6 @@ export function useApplicationData() {
       })
       .catch((err) => {
         console.error(err);
-        error = ERROR_SAVE;
       });
   };
   const cancelInterview = (id) => {
@@ -51,7 +49,6 @@ export function useApplicationData() {
       })
       .catch((err) => {
         console.error(err);
-        error = ERROR_DELETE;
       });
   };
   useEffect(() => {
