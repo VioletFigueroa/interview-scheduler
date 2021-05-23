@@ -8,10 +8,15 @@ import Header from "./Header";
 import Empty from "./Empty";
 import Show from "./Show";
 import Form from "./Form";
+import Status from "./Status";
+import Confirm from "./Confirm";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
+const CONFIRM = "CONFIRM";
+const EDIT = "EDIT";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -22,9 +27,18 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-    props.bookInterview(interview);
-    transition("SHOW");
+    transition(SAVING);
+    props.bookInterview(props.id, interview);
+    transition(SHOW);
   };
+  const cancel = (id) => {
+    transition(CONFIRM);
+    props.cancelInterview(id);
+    transition(EMPTY);
+  };
+  const edit = (id) => {
+    transition(EDIT);
+  }
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -33,9 +47,18 @@ export default function Appointment(props) {
         <Show
           student={props.interview && props.interview.student}
           interviewer={props.interview && props.interview.interviewer}
+          onCancel={cancel}
+          onEdit={edit}
         />
       )}
-      {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} />}
+      {mode === CREATE && (
+        <Form interviewers={ props.interviewers} onCancel={back} onSave={save} />
+      )}
+      {mode === EDIT && (
+        <Form name = {props.name} interviewers={ props.interviewers} onCancel={back} onSave={save} />
+      )}
+      {mode === SAVING && <Status message={props.message} />}
+      {mode === CONFIRM && <Confirm onClick={() => cancel(props.id)}/>}
     </article>
   );
 }
