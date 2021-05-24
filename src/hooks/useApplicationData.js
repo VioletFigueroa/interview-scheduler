@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import { getSpotsForDay } from "helpers/selectors";
+
 export function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {},
-    
   });
   const setDay = (day) => setState({ ...state, day });
-  const bookInterview = (id, interview) => {
+  const bookInterview = (id, interview, selectedDay) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -19,19 +20,26 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    const day = {
+      ...state.days[selectedDay],
+      spots: { ...getSpotsForDay(state, selectedDay) },
+    };
+    const days = state.days;
+    days[selectedDay] = day;
     return axios
       .put(`/api/appointments/${id}`, appointment)
       .then(() => {
         setState({
           ...state,
           appointments,
+          days,
         });
       })
       .catch((err) => {
         console.error(err);
       });
   };
-  const cancelInterview = (id) => {
+  const cancelInterview = (id, selectedDay) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...null },
@@ -40,12 +48,19 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+    const day = {
+      ...state.days[selectedDay],
+      spots: { ...getSpotsForDay(state, selectedDay) },
+    };
+    const days = state.days;
+    days[selectedDay] = day;
     return axios
       .delete(`/api/appointments/${id}`)
       .then(() => {
         setState({
           ...state,
           appointments,
+          days,
         });
       })
       .catch((err) => {
@@ -69,7 +84,6 @@ export function useApplicationData() {
           appointments: res[1].data,
           interviewers: res[2].data,
         }));
-
       })
       .catch((err) => console.log(err));
   }, []);

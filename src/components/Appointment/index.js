@@ -34,14 +34,14 @@ export default function Appointment(props) {
     transition(SAVING);
 
     props
-      .bookInterview(props.id, interview)
+      .bookInterview(props.id, interview, props.day)
       .then(() => transition(SHOW))
       .catch((error) => transition(ERROR_SAVE, true));
   };
   const destroy = (event) => {
     transition(DELETING, true);
     props
-      .cancelInterview(props.id)
+      .cancelInterview(props.id, props.day)
       .then(() => transition(EMPTY))
       .catch((error) => transition(ERROR_DELETE, true));
   };
