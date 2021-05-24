@@ -29,7 +29,7 @@ I do not lose data after a browser refresh.
 
 ## Final Product
 
-!["Screenshot of Interview Scheduler"]()
+!["Screenshot of Interview Scheduler"](https://github.com/VioletFigueroa/interview-scheduler/blob/master/documents/interview%20scheduler%20screenshot%201.png?raw=true)
 
 ## Dependencies
 
