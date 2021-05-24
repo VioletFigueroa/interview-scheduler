@@ -11,8 +11,7 @@ export default function Show(props) {
   const onEdit = (id) => {
     setInterviewer(null);
     props.onEdit(id);
-  }
-
+  };
 
   return (
     <main className="appointment__card appointment__card--show">
