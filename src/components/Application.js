@@ -8,7 +8,7 @@ import {
   getInterview,
   getInterviewersForDay,
 } from "helpers/selectors";
-import { useApplicationData } from "helpers/useApplicationData";
+import { useApplicationData } from "hooks/useApplicationData";
 
 import "components/Application.scss";
 

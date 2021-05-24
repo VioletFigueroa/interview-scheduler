@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export function useApplicationData() {
@@ -7,6 +7,7 @@ export function useApplicationData() {
     days: [],
     appointments: {},
     interviewers: {},
+    
   });
   const setDay = (day) => setState({ ...state, day });
   const bookInterview = (id, interview) => {
@@ -68,6 +69,7 @@ export function useApplicationData() {
           appointments: res[1].data,
           interviewers: res[2].data,
         }));
+
       })
       .catch((err) => console.log(err));
   }, []);
