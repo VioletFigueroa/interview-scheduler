@@ -29,10 +29,17 @@ export function getInterviewersForDay(state, day) {
   );
 }
 export function getSpotsForDay(state, day) {
-  if (state.days.length === 0 || state === null || day === null) {
-    return [];
+  if (
+    state.days.length === 0 ||
+    state === null ||
+    day === null ||
+    day === undefined
+  ) {
+    return ;
   }
+  console.log("Day: " + day);
   const found = state.days.find((dayListItem) => day === dayListItem.name);
-  if (found === undefined) return [];
+  if (found === undefined) return ;
+  console.log("Found Spots: " + found.spots);
   return found.spots;
 }

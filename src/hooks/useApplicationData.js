@@ -20,15 +20,19 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    const day = {
+    const spots = getSpotsForDay(state, selectedDay) - 1;
+    console.log("New Book Spots: " + spots);
+    const newDay = {
       ...state.days[selectedDay],
-      spots: { ...getSpotsForDay(state, selectedDay) },
     };
-    const days = state.days;
-    days[selectedDay] = day;
+    newDay.spots = spots;
+    const days = [...state.days];
+    days[selectedDay] = newDay;
     return axios
       .put(`/api/appointments/${id}`, appointment)
       .then(() => {
+        console.log("Book Days: " + JSON.stringify(days));
+        console.log("Book Appointments: " + JSON.stringify(appointments));
         setState({
           ...state,
           appointments,
@@ -42,21 +46,25 @@ export function useApplicationData() {
   const cancelInterview = (id, selectedDay) => {
     const appointment = {
       ...state.appointments[id],
-      interview: { ...null },
+      interview: null,
     };
     const appointments = {
       ...state.appointments,
       [id]: appointment,
     };
+    const spots = getSpotsForDay(state, selectedDay) + 1;
+    console.log(`New Cancel Spots: ` + spots);
     const day = {
       ...state.days[selectedDay],
-      spots: { ...getSpotsForDay(state, selectedDay) },
     };
-    const days = state.days;
+    day.spots = spots;
+    const days = [...state.days];
     days[selectedDay] = day;
     return axios
       .delete(`/api/appointments/${id}`)
       .then(() => {
+        console.log("Cancel Days: " + JSON.stringify(days));
+        console.log("Cancel Appointments: " + JSON.stringify(appointments));
         setState({
           ...state,
           appointments,

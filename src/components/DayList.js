@@ -13,6 +13,6 @@ export default function DayList(props) {
       interviewer={day.interviewer}
     />
   ));
-
+  console.log("Props.days: " + JSON.stringify(props.days));
   return <ul>{days}</ul>;
 }
