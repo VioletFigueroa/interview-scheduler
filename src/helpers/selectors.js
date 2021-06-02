@@ -13,10 +13,10 @@ const getDay = (state, day) => {
   return found;
 };
 
-export function getIDForDay(state, day) {
+export function getIndexForDay(state, day) {
   const found = getDay(state, day);
   if (found === undefined) return undefined;
-  return found.id;
+  return found.id - 1;
 }
 
 export function getAppointmentsForDay(state, day) {

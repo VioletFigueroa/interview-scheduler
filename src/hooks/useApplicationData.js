@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-import { getIDForDay } from "helpers/selectors";
+import { getIndexForDay } from "helpers/selectors";
 
 import { getSpotsForDay } from "helpers/selectors";
 
@@ -27,17 +27,17 @@ export function useApplicationData() {
       [id]: appointment,
     };
 
-    const dayID = getIDForDay(selectedDay);
+    const dayIndex = getIndexForDay(state, selectedDay);
 
     const newDay = {
-      ...state.days[dayID],
+      ...state.days[dayIndex],
     };
 
     const spots = getSpotsForDay(state, selectedDay) - 1;
     newDay["spots"] = spots;
 
     const days = [...state.days];
-    days[dayID] = newDay;
+    days[dayIndex] = newDay;
 
     return axios
       .put(`/api/appointments/${id}`, appointment)
@@ -64,17 +64,17 @@ export function useApplicationData() {
       [id]: appointment,
     };
 
-    const dayID = getIDForDay(selectedDay);
+    const dayIndex = getIndexForDay(state, selectedDay);
 
     const newDay = {
-      ...state.days[dayID],
+      ...state.days[dayIndex],
     };
 
     const spots = getSpotsForDay(state, selectedDay) + 1;
     newDay["spots"] = spots;
 
     const days = [...state.days];
-    days[dayID] = newDay;
+    days[dayIndex] = newDay;
 
     return axios
       .delete(`/api/appointments/${id}`)
