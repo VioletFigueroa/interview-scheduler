@@ -1,11 +1,17 @@
 const getDay = (state, day) => {
-  if (state.days.length === 0 || state === null || day === null) {
+  if (
+    state === null ||
+    day === null ||
+    state === undefined ||
+    day === undefined ||
+    state.days.length === 0
+  ) {
     return undefined;
   }
   const found = state.days.find((dayListItem) => day === dayListItem.name);
   if (found === undefined) return undefined;
   return found;
-}
+};
 
 export function getIDForDay(state, day) {
   const found = getDay(state, day);

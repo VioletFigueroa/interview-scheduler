@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import { getIDForDay } from "helpers/selectors";
 import { getSpotsForDay } from "helpers/selectors";
 
 export function useApplicationData() {
@@ -20,19 +21,17 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    const spots = getSpotsForDay(state, selectedDay) - 1;
-    console.log("New Book Spots: " + spots);
+    const dayID = getIDForDay(selectedDay);
     const newDay = {
-      ...state.days[selectedDay],
+      ...state.days[dayID],
     };
+    const spots = getSpotsForDay(state, selectedDay) - 1;
     newDay.spots = spots;
     const days = [...state.days];
-    days[selectedDay] = newDay;
+    days[dayID] = newDay;
     return axios
       .put(`/api/appointments/${id}`, appointment)
       .then(() => {
-        console.log("Book Days: " + JSON.stringify(days));
-        console.log("Book Appointments: " + JSON.stringify(appointments));
         setState({
           ...state,
           appointments,
@@ -52,19 +51,17 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    const spots = getSpotsForDay(state, selectedDay) + 1;
-    console.log(`New Cancel Spots: ` + spots);
-    const day = {
-      ...state.days[selectedDay],
+    const dayID = getIDForDay(selectedDay);
+    const newDay = {
+      ...state.days[dayID],
     };
-    day.spots = spots;
+    const spots = getSpotsForDay(state, selectedDay) + 1;
+    newDay.spots = spots;
     const days = [...state.days];
-    days[selectedDay] = day;
+    days[dayID] = newDay;
     return axios
       .delete(`/api/appointments/${id}`)
       .then(() => {
-        console.log("Cancel Days: " + JSON.stringify(days));
-        console.log("Cancel Appointments: " + JSON.stringify(appointments));
         setState({
           ...state,
           appointments,
