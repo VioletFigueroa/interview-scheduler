@@ -28,10 +28,13 @@ export function useApplicationData() {
     return axios
       .put(`/api/appointments/${id}`, newAppointment)
       .then(() => {
-        setState({
+        const updatedState = {
           ...state,
           appointments: newAppointments,
-          days: updateSpots(state),
+        };
+        setState({
+          ...updatedState,
+          days: updateSpots(updatedState),
         });
       })
       .catch((err) => {
@@ -51,10 +54,13 @@ export function useApplicationData() {
     return axios
       .delete(`/api/appointments/${id}`)
       .then(() => {
-        setState({
+        const updatedState = {
           ...state,
           appointments: newAppointments,
-          days: updateSpots(state),
+        };
+        setState({
+          ...updatedState,
+          days: updateSpots(updatedState),
         });
       })
       .catch((err) => {
