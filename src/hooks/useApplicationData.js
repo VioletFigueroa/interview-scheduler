@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-import { getIndexForDay } from "helpers/selectors";
-
-import { getSpotsForDay } from "helpers/selectors";
+import { updateSpots } from "helpers/selectors";
 
 export function useApplicationData() {
   const [state, setState] = useState({
@@ -16,36 +14,26 @@ export function useApplicationData() {
 
   const setDay = (day) => setState({ ...state, day });
 
-  const bookInterview = (id, interview, selectedDay) => {
-    const appointment = {
+  const bookInterview = (id, interview) => {
+    const newAppointment = {
       ...state.appointments[id],
       interview: { ...interview },
     };
 
-    const appointments = {
+    const newAppointments = {
       ...state.appointments,
-      [id]: appointment,
+      [id]: newAppointment,
     };
-
-    const dayIndex = getIndexForDay(state, selectedDay);
-
-    const newDay = {
-      ...state.days[dayIndex],
-    };
-
-    const spots = getSpotsForDay(state, selectedDay) - 1;
-    newDay["spots"] = spots;
-
-    const days = [...state.days];
-    days[dayIndex] = newDay;
-
+    
+    const newDays = updateSpots(state); 
+    
     return axios
-      .put(`/api/appointments/${id}`, appointment)
+      .put(`/api/appointments/${id}`, newAppointment)
       .then(() => {
         setState({
           ...state,
-          appointments,
-          days,
+          appointments: newAppointments,
+          days: newDays,
         });
       })
       .catch((err) => {
@@ -54,35 +42,23 @@ export function useApplicationData() {
   };
 
   const cancelInterview = (id, selectedDay) => {
-    const appointment = {
-      ...state.appointments[id],
-      interview: null,
-    };
-
-    const appointments = {
+    const newAppointments = {
       ...state.appointments,
-      [id]: appointment,
+      [id]: {
+        ...state.appointments[id],
+        interview: null,
+      },
     };
 
-    const dayIndex = getIndexForDay(state, selectedDay);
-
-    const newDay = {
-      ...state.days[dayIndex],
-    };
-
-    const spots = getSpotsForDay(state, selectedDay) + 1;
-    newDay["spots"] = spots;
-
-    const days = [...state.days];
-    days[dayIndex] = newDay;
-
+    const newDays = updateSpots(state);
+    
     return axios
       .delete(`/api/appointments/${id}`)
       .then(() => {
         setState({
           ...state,
-          appointments,
-          days,
+          appointments: newAppointments,
+          days: newDays,
         });
       })
       .catch((err) => {

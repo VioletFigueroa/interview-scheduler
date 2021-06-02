@@ -1,4 +1,4 @@
-const getDay = (state, day) => {
+export function getDay(state, day) {
   if (
     state === null ||
     day === null ||
@@ -11,7 +11,7 @@ const getDay = (state, day) => {
   const found = state.days.find((dayListItem) => day === dayListItem.name);
   if (found === undefined) return undefined;
   return found;
-};
+}
 
 export function getIndexForDay(state, day) {
   const found = getDay(state, day);
@@ -44,7 +44,16 @@ export function getInterviewersForDay(state, day) {
 }
 
 export function getSpotsForDay(state, day) {
-  const found = getDay(state, day);
-  if (found === undefined) return undefined;
-  return found.spots;
+  let spots = 0;
+  for (const id of day.appointments) {
+    if (!state.appointments[id].interview) spots++;
+  }
+  return spots;
+}
+export function updateSpots(state) {
+  const dayObj = getDay(state, state.day);
+  const spots = getSpotsForDay(state, dayObj);
+  return state.days.map((day) =>
+    day.name === state.day ? { ...dayObj, spots } : day
+  );
 }
