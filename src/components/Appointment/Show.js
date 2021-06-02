@@ -4,10 +4,12 @@ import "./styles.scss";
 
 export default function Show(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+
   const onDelete = (id) => {
     setInterviewer(null);
     props.onDelete(id);
   };
+
   const onEdit = (id) => {
     setInterviewer(null);
     props.onEdit(id);

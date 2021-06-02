@@ -35,7 +35,6 @@ export function getInterview(state, interview) {
   return interviewerData;
 }
 
-// Manali worked with me to help guide my code for this function;
 export function getInterviewersForDay(state, day) {
   const found = getDay(state, day);
   if (found === undefined) return [];

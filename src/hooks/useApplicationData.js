@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+
 import axios from "axios";
 
 import { getIDForDay } from "helpers/selectors";
+
 import { getSpotsForDay } from "helpers/selectors";
 
 export function useApplicationData() {
@@ -11,24 +13,32 @@ export function useApplicationData() {
     appointments: {},
     interviewers: {},
   });
+
   const setDay = (day) => setState({ ...state, day });
+
   const bookInterview = (id, interview, selectedDay) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
     };
+
     const appointments = {
       ...state.appointments,
       [id]: appointment,
     };
+
     const dayID = getIDForDay(selectedDay);
+
     const newDay = {
       ...state.days[dayID],
     };
+
     const spots = getSpotsForDay(state, selectedDay) - 1;
-    newDay.spots = spots;
+    newDay["spots"] = spots;
+
     const days = [...state.days];
     days[dayID] = newDay;
+
     return axios
       .put(`/api/appointments/${id}`, appointment)
       .then(() => {
@@ -42,23 +52,30 @@ export function useApplicationData() {
         console.error(err);
       });
   };
+
   const cancelInterview = (id, selectedDay) => {
     const appointment = {
       ...state.appointments[id],
       interview: null,
     };
+
     const appointments = {
       ...state.appointments,
       [id]: appointment,
     };
+
     const dayID = getIDForDay(selectedDay);
+
     const newDay = {
       ...state.days[dayID],
     };
+
     const spots = getSpotsForDay(state, selectedDay) + 1;
-    newDay.spots = spots;
+    newDay["spots"] = spots;
+
     const days = [...state.days];
     days[dayID] = newDay;
+
     return axios
       .delete(`/api/appointments/${id}`)
       .then(() => {
@@ -72,11 +89,16 @@ export function useApplicationData() {
         console.error(err);
       });
   };
+
   useEffect(() => {
     const api = "/api/";
+
     const daysURL = api + "days";
+
     const appointmentsURL = api + "appointments";
+
     const interviewersURL = api + "interviewers";
+
     Promise.all([
       axios.get(daysURL),
       axios.get(appointmentsURL),
@@ -92,6 +114,7 @@ export function useApplicationData() {
       })
       .catch((err) => console.log(err));
   }, []);
+
   return {
     state,
     setDay,

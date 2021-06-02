@@ -8,15 +8,19 @@ import Button from "components/Button";
 
 export default function Form(props) {
   const [name, setName] = useState(props.name || "");
+
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+
   const reset = () => {
     setName("");
     setInterviewer(null);
   };
+
   const cancel = () => {
     reset();
     props.onCancel();
   };
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
