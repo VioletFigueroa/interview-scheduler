@@ -24,16 +24,14 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: newAppointment,
     };
-    
-    const newDays = updateSpots(state); 
-    
+
     return axios
       .put(`/api/appointments/${id}`, newAppointment)
       .then(() => {
         setState({
           ...state,
           appointments: newAppointments,
-          days: newDays,
+          days: updateSpots(state),
         });
       })
       .catch((err) => {
@@ -50,15 +48,13 @@ export function useApplicationData() {
       },
     };
 
-    const newDays = updateSpots(state);
-    
     return axios
       .delete(`/api/appointments/${id}`)
       .then(() => {
         setState({
           ...state,
           appointments: newAppointments,
-          days: newDays,
+          days: updateSpots(state),
         });
       })
       .catch((err) => {
