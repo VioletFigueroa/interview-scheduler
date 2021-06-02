@@ -36,7 +36,6 @@ I do not lose data after a browser refresh.
 React
 Webpack, Babel
 Axios
-WebSockets
 Storybook, Webpack Dev Server, Jest, Testing Library
 The Scheduler client application created using Create React App. Express is the basis for the Scheduler API server application.
 
