@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import InterviewerListItem from "./InterviewerListItem";
 import "./InterviewerList.scss";
@@ -10,11 +11,15 @@ export default function InterviewerList(props) {
         key={interviewer.id}
         name={interviewer.name}
         avatar={interviewer.avatar}
-        selected={interviewer.id === props.interviewer}
-        setInterviewer={() => props.setInterviewer(interviewer.id)}
+        value={props.interviewer}
+        onChange={() => props.setInterviewer(interviewer.id)}
       />
     );
   });
+  InterviewerList.propTypes = {
+    interviewers: PropTypes.array.isRequired,
+  };
+
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
