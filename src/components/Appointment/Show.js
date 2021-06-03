@@ -11,7 +11,7 @@ export default function Show(props) {
   };
 
   const onEdit = (id) => {
-    setInterviewer(null);
+    setInterviewer(interviewer);
     props.onEdit(id);
   };
 

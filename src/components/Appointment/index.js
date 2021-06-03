@@ -60,7 +60,7 @@ export default function Appointment(props) {
       .catch(() => transition(ERROR_SAVE, true));
   };
 
-  const destroy = (event) => {
+  const destroy = () => {
     transition(DELETING, true);
     props
       .cancelInterview(props.id, props.day)
@@ -79,7 +79,7 @@ export default function Appointment(props) {
       {mode === SHOW && (
         <Show
           student={props.interview && props.interview.student}
-          interviewer={props.interview && props.interview.interviewer}
+          interviewer={props.interview.interviewer}
           onDelete={confirm}
           onEdit={edit}
         />
@@ -90,6 +90,7 @@ export default function Appointment(props) {
       {mode === EDIT && (
         <Form
           name={props.interview.student}
+          interviewer={props.interview.interviewer}
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
