@@ -63,20 +63,17 @@ export default function Appointment(props) {
       .catch(() => transition(ERROR_DELETE, true));
   };
 
-  const confirm = () => transition(CONFIRM);
-
-  const edit = () => transition(EDIT);
 
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {mode === EMPTY && <Empty onClick={() => transition(CREATE)} />}
-      {mode === SHOW && (
+      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+      {mode === SHOW && props.interview && (
         <Show
-          student={props.interview && props.interview.student}
+          student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete={confirm}
-          onEdit={edit}
+          onDelete={() => transition(CONFIRM)}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CREATE && (
@@ -85,7 +82,7 @@ export default function Appointment(props) {
       {mode === EDIT && (
         <Form
           name={props.interview.student}
-          interviewer={props.interview.interviewer}
+          interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
