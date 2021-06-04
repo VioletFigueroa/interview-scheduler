@@ -12,7 +12,7 @@ export function useApplicationData() {
     interviewers: {},
   });
 
-  const setDay = (day) => setState({ ...state, day });
+  const setDay = (day) => setState((prev) => ({ ...prev, day }));
 
   const bookInterview = (id, interview) => {
     const newAppointment = {
