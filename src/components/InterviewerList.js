@@ -15,7 +15,6 @@ export default function InterviewerList(props) {
         selected={interviewer.id === props.value}
         value={props.value}
         setInterviewer={(id) => {
-          console.log("InterviewerList Props id: " + id);
           props.setInterviewer(id);
         }}
       />

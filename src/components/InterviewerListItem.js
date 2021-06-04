@@ -9,12 +9,10 @@ export default function InterviewerListItem(props) {
     "interviewers__item--selected": props.selected,
     "interviewers__item-image--selected": props.selected,
   });
-  console.log("Key Value for Interviewer: " + props.id);
   return (
     <li
       className={interviewerClass}
       onClick={() => {
-        console.log("Props.id: " + props.id);
         props.setInterviewer(props.id);
       }}
     >
