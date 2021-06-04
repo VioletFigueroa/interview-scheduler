@@ -74,7 +74,7 @@ describe("Appointment", () => {
     });
     fireEvent.click(queryByAltText(appointment, "Mildred Nazir"));
 
-    fireEvent.click(queryByText(appointment, "Save"));
+    fireEvent.click(queryByAltText(appointment, "Save"));
 
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
@@ -86,20 +86,46 @@ describe("Appointment", () => {
 
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   });
-  it("shows the delete error when failing to save an appointment", () => {
+
+  it("shows the save error when failing to save an appointment", () => {
     const { container } = render(<Application />);
 
     const appointment = getAllByTestId(container, "appointment").find(
       (appointment) => queryByText(appointment, "Archie Cohen")
     );
 
-    fireEvent.click(queryByAltText(appointment, "Delete"));
+    fireEvent.click(queryByAltText(appointment, "Edit"));
+
+    fireEvent.change(getByPlaceholderText("Enter Student Name"), {
+      target: { value: "Lydia Miller-Jones" },
+    });
+    fireEvent.click(queryByAltText(appointment, "Mildred Nazir"));
+
+    fireEvent.click(queryByText(appointment, "Save"));
+
+    waitForElement(() => {
+      queryByAltText(appointment, "Close");
+    });
+    expect(
+      getByText(appointment, "Could not save appointment.")
+    ).toBeInTheDocument();
+    debug();
+  });
+
+  it("shows the delete error when failing to delete an appointment", () => {
+    const { container } = render(<Application />);
+
+    const appointment = getAllByTestId(container, "appointment").find(
+      (appointment) => queryByText(appointment, "Archie Cohen")
+    );
+
+    fireEvent.click(queryByText(appointment, "Delete"));
 
     expect(
       getByText(appointment, "Are you sure you would like to delete?")
     ).toBeInTheDocument();
 
-    fireEvent.click(queryByText(appointment, "Confirm"));
+    fireEvent.click(queryByAltText(appointment, "Confirm"));
     axios.put.mockRejectedValueOnce();
 
     waitForElement(() => {
@@ -108,5 +134,6 @@ describe("Appointment", () => {
     expect(
       getByText(appointment, "Could not delete appointment.")
     ).toBeInTheDocument();
+    debug();
   });
 });
