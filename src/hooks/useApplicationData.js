@@ -37,9 +37,6 @@ export function useApplicationData() {
           days: updateSpots(updatedState),
         });
       })
-      .catch((err) => {
-        console.error(err);
-      });
   };
 
   const cancelInterview = (id, selectedDay) => {
@@ -63,9 +60,6 @@ export function useApplicationData() {
           days: updateSpots(updatedState),
         });
       })
-      .catch((err) => {
-        console.error(err);
-      });
   };
 
   useEffect(() => {
