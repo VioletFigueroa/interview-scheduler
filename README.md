@@ -13,11 +13,13 @@
 **Result snapshot:** Full-stack SPA with real-time updates, API authentication flow, and client-side state management using security-conscious practices.
 
 **Quick review:**
+
 - **Security focus:** Client-side validation, error handling, WebSocket secure connections
 - **Key files:** `src/hooks/useApplicationData.js` (state management), `src/components/` (UI components)
 - **Start with:** Run locally to see authentication flow and data validation in action
 
 ## Overview
+
 Interview Scheduler is a single-page application (SPA) built with React that allows students to book and manage technical interviews with mentors. The application demonstrates modern web development practices with a focus on secure API communication, proper state management, and comprehensive error handling.
 
 **Developed during:** Lighthouse Labs Web Development Bootcamp (April - June 2021)
@@ -25,36 +27,42 @@ Interview Scheduler is a single-page application (SPA) built with React that all
 ## Security Relevance for Application Security
 
 ### Input Validation & Data Sanitization
+
 - **Client-side validation** prevents malformed data submission before API calls
 - **Controlled components** ensure all user input is validated through React state
 - **Error boundary implementation** prevents application crashes from propagating sensitive information
 - Demonstrates understanding of defense-in-depth validation strategies
 
 ### API Security & Authentication
+
 - **Secure HTTP communication** with proper headers and CORS configuration
 - **WebSocket connections** for real-time updates with authentication flow
 - **Proxy configuration** demonstrates understanding of API gateway patterns
 - Error handling prevents information disclosure through verbose error messages
 
 ### State Management Security
+
 - **Immutable state updates** prevent race conditions and state corruption
 - **Controlled data flow** using React hooks reduces attack surface
 - **Session persistence** with proper data lifecycle management
 - Demonstrates secure handling of sensitive scheduling information
 
 ### Testing & Quality Assurance
+
 - **Unit testing** with Jest ensures component reliability
 - **Integration testing** validates API interactions and error scenarios
 - **End-to-end testing** coverage for critical user workflows
 - **Storybook implementation** for isolated component testing and security review
 
 ### Secure Development Practices
+
 - **Dependency management** with regular updates and vulnerability scanning
 - **Environment variable isolation** keeps sensitive configuration secure
 - **Error logging** without exposing stack traces or internal details
 - **Code review workflow** through Git version control
 
 ## Objectives
+
 - Build a secure, responsive single-page application
 - Implement real-time data synchronization using WebSockets
 - Create comprehensive test coverage for reliability
@@ -62,6 +70,7 @@ Interview Scheduler is a single-page application (SPA) built with React that all
 - Handle errors gracefully without information disclosure
 
 ## Methodology
+
 - **React** for component-based architecture with security boundaries
 - **Axios** for secure HTTP client with interceptor patterns
 - **WebSockets** for real-time updates with authentication
@@ -69,6 +78,7 @@ Interview Scheduler is a single-page application (SPA) built with React that all
 - **Storybook** for isolated component development and security review
 
 ## Key Features
+
 - **Appointment Management:** Create, edit, and delete interview appointments
 - **Real-time Updates:** WebSocket integration for live data synchronization
 - **Responsive Design:** Mobile-first approach with accessibility considerations
@@ -77,6 +87,7 @@ Interview Scheduler is a single-page application (SPA) built with React that all
 - **Optimistic Updates:** Enhanced UX with rollback on failure
 
 ## Technologies Used
+
 - **Frontend:** React 16.9, React Hooks, React DOM
 - **HTTP Client:** Axios with request/response interceptors
 - **Real-time:** WebSockets for bidirectional communication
@@ -86,6 +97,7 @@ Interview Scheduler is a single-page application (SPA) built with React that all
 - **State Management:** Custom hooks with useReducer pattern
 
 ## Application Security Lessons Learned
+
 - **Client-side validation is first defense, not last:** Implementing validation at the UI layer reduces server load and improves UX, but must be paired with server-side validation
 - **Error messages require careful design:** Balancing user-friendly messages with security (avoiding information disclosure) is critical
 - **State management impacts security:** Proper React state handling prevents race conditions that could lead to authorization bypasses
@@ -95,22 +107,26 @@ Interview Scheduler is a single-page application (SPA) built with React that all
 ## Files Included
 
 **Source Code:**
+
 - `src/components/` - React components with input validation and error handling
 - `src/hooks/` - Custom hooks for state management and API integration
 - `src/helpers/` - Utility functions including data selectors and validators
 - `src/__tests__/` - Comprehensive test suite
 
 **Configuration:**
+
 - `package.json` - Dependencies with version pinning for security
 - `.env.development` - Environment configuration (template)
 - `.storybook/` - Component development and security review environment
 
 **Documentation:**
+
 - `documents/` - Application screenshots and architectural diagrams
 
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js (v12.x or higher)
 - npm (v6.x or higher)
 - Running instance of [scheduler-api](https://github.com/VioletFigueroa/scheduler-api)
@@ -118,12 +134,14 @@ Interview Scheduler is a single-page application (SPA) built with React that all
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/VioletFigueroa/interview-scheduler.git
    cd interview-scheduler
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
@@ -133,9 +151,11 @@ Interview Scheduler is a single-page application (SPA) built with React that all
    - Ensure API server is running on `http://localhost:8001`
 
 4. **Start the development server**
+
    ```bash
    npm start
    ```
+
    The application will be available at `http://localhost:8000`
 
 ### Running Tests
@@ -151,10 +171,12 @@ npm run storybook
 ## User Stories
 
 **As an Interviewer:**
+
 - I want to see scheduled interviews throughout the week
 - I want to manage my availability in real-time
 
 **As a Student:**
+
 - I want to book interviews in available time slots
 - I want to select my preferred interviewer
 - I want to edit or cancel appointments if needed
