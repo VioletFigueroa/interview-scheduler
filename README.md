@@ -24,6 +24,25 @@ Interview Scheduler is a single-page application (SPA) built with React that all
 
 **Developed during:** Lighthouse Labs Web Development Bootcamp (April - June 2021)
 
+## Development Approach
+
+### LLM Usage (~5-10% of implementation)
+This bootcamp project involved minimal AI assistance, limited to:
+- **Syntax Reference**: Quick lookups for React hooks and testing patterns
+- **Test Template Hints**: Basic structure for Jest and Cypress tests
+
+All core implementation is original work demonstrating hands-on learning.
+
+### Human-Led Implementation (~90-95%)
+- **Component Architecture**: All React component design, state management, and data flow (100% original)
+- **State Management**: Custom hooks with useReducer pattern and API integration logic
+- **Testing Strategy**: Unit tests (Jest), integration tests, and E2E tests (Cypress) - all test scenarios human-authored
+- **Security Implementation**: Input validation, error handling, WebSocket authentication
+- **CI/CD Setup**: CircleCI integration and deployment configuration
+
+### Development Philosophy
+This project represents fundamental hands-on learning of React development and testing practices. The minimal LLM usage reflects the bootcamp learning environment where understanding concepts through implementation was essential.
+
 ## Security Relevance for Application Security
 
 ### Input Validation & Data Sanitization
