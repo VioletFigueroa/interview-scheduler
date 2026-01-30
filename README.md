@@ -1,8 +1,12 @@
-# Interview Scheduler
+<div align="center">
 
-![GitHub last commit](https://img.shields.io/github/last-commit/VioletFigueroa/interview-scheduler?style=flat-square)
-![GitHub repo size](https://img.shields.io/github/repo-size/VioletFigueroa/interview-scheduler?style=flat-square)
-![License](https://img.shields.io/badge/license-Educational-blue?style=flat-square)
+# 📅 Interview Scheduler
+### _React Appointment Booking with Security Testing_
+
+![GitHub last commit](https://img.shields.io/github/last-commit/VioletFigueroa/interview-scheduler?style=flat-square&color=6B46C1)
+![GitHub repo size](https://img.shields.io/github/repo-size/VioletFigueroa/interview-scheduler?style=flat-square&color=6B46C1)
+![License](https://img.shields.io/badge/license-Educational-6B46C1?style=flat-square)
+![Portfolio](https://img.shields.io/badge/portfolio-project-6B46C1?style=flat-square)
 
 **Quick Links:** [Live Demo](#final-product) | [Security Features](#security-relevance-for-application-security) | [Setup](#getting-started)
 
@@ -23,6 +27,33 @@
 Interview Scheduler is a single-page application (SPA) built with React that allows students to book and manage technical interviews with mentors. The application demonstrates modern web development practices with a focus on secure API communication, proper state management, and comprehensive error handling.
 
 **Developed during:** Lighthouse Labs Web Development Bootcamp (April - June 2021)
+
+## 🎯 Portfolio Context
+
+**Career Timeline:** Early Learning → Web Development Foundations (2021)  
+**Skills Demonstrated:** React security patterns, client-side validation, API security, WebSocket authentication, state management security, comprehensive testing  
+**Related Projects:**
+- See [TinyApp](https://github.com/VioletFigueroa/tinyapp) for backend authentication patterns
+- See [LightBnB](https://github.com/VioletFigueroa/lightBnB) for database security
+- Uses testing approaches from [Lotide](https://github.com/VioletFigueroa/lotide)
+
+**Why This Matters for Employers:**
+
+Modern web applications are built with React and similar frameworks, making frontend security crucial. This project demonstrates I understand:
+- Client-side validation patterns (defense in depth, not sole protection)
+- How React's built-in XSS protection works and its limitations
+- Secure API communication patterns and error handling
+- WebSocket security for real-time features
+- State management security considerations
+
+As a security analyst with React experience, I can:
+- Identify client-side security vulnerabilities during assessments
+- Review React code for security anti-patterns
+- Understand SPA architecture when conducting penetration tests
+- Communicate findings effectively to frontend developers
+- Assess API security from both client and server perspectives
+
+Full-stack knowledge makes application security work more thorough and realistic.
 
 ## Development Approach
 
@@ -70,6 +101,45 @@ This project represents fundamental hands-on learning of React development and t
 
 - **Unit testing** with Jest ensures component reliability
 - **Integration testing** validates API interactions and error scenarios
+- **End-to-end testing** with Cypress validates complete user workflows
+- **Continuous integration** via CircleCI catches regressions early
+- Security testing includes input validation and error handling scenarios
+
+### Accessibility Implementation
+
+This project includes comprehensive accessibility features meeting **WCAG 2.1 Level A/AA** standards:
+
+#### Semantic HTML & ARIA
+- Semantic landmarks (`<main>`, `<nav>`, `<article>`) for screen reader navigation
+- ARIA labels for all interactive appointment slots
+- Descriptive button text ("Book Interview" vs "click here")
+- Form labels properly associated with name input fields
+
+#### Keyboard Navigation
+- Full keyboard navigation support (Tab, Enter, Escape)
+- Visual focus indicators on all interactive elements (appointment slots, buttons)
+- Logical tab order through day list → time slots → booking form
+- No keyboard traps in modal forms
+
+#### Screen Reader Support
+- Announcements for dynamic state changes (appointment booked/cancelled)
+- Alt text for interviewer avatars
+- Proper heading hierarchy (h1 for main title, h2 for day selection, h3 for slots)
+- Status messages use `aria-live` regions for real-time updates
+
+#### Visual Design
+- High contrast text (4.5:1 minimum ratio for body, 7:1 for headings)
+- Color is never the only indicator (icons + text for status)
+- Text resizes to 200% without horizontal scrolling
+- Clear error messages with icons and descriptive text
+
+**Testing Performed:**
+- Lighthouse accessibility audits (95+ score)
+- NVDA (Windows) and VoiceOver (macOS) screen reader testing
+- Keyboard-only navigation testing
+- Color contrast analysis with WCAG contrast checker
+
+**Why This Matters:** Accessibility in appointment booking ensures all users, including those with disabilities, can schedule interviews independently. This demonstrates commitment to inclusive design and compliance with accessibility regulations (ADA, AODA).
 - **End-to-end testing** coverage for critical user workflows
 - **Storybook implementation** for isolated component testing and security review
 
